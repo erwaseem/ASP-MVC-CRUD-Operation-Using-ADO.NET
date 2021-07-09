@@ -1,0 +1,27 @@
+<h4>Create New Employee</h4>
+<hr />
+<div>
+  <form action="" method="post">
+    <div class="form-group">
+      <label for="Eno">Enter Eno:</label>
+      <input type="text" name="Eno" class="form-control" id="Eno">
+    </div>
+    <div class="form-group">
+      <label for="Ename">Enter Ename:</label>
+      <input type="text" name="Ename" class="form-control" id="Ename">
+    </div>
+    <div class="form-group">
+      <label for="Salary">Enter Salary:</label>
+      <input type="text" name="Salary" class="form-control" id="Salary">
+    </div>
+    <div class="form-group">
+      <label for="Job">Enter Job:</label>
+      <input type="text" name="Job" class="form-control" id="Job">
+    </div>
+    <div class="form-group">
+      <label for="Dname">Enter Dname:</label>
+      <input type="text" name="Dname" class="form-control" id="Dname">
+    </div>
+    <button type="submit" class="btn btn-default">Create</button>
+  </form>
+</div>

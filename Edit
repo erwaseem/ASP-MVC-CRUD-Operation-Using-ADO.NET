@@ -1,0 +1,28 @@
+@model ADOIntegration.Models.Employee
+
+<h4>Employee Edit Page</h4>
+<div>
+  <form action="" method="post">
+    <div class="form-group">
+      <label for="Eno">Enter Eno:</label>
+      <input type="text" name="Eno" value="@Model.Eno" readonly class="form-control" id="Eno">
+    </div>
+    <div class="form-group">
+      <label for="Ename">Enter Ename:</label>
+      <input type="text" name="Ename" value="@Model.Ename" class="form-control" id="Ename">
+    </div>
+    <div class="form-group">
+      <label for="Salary">Enter Salary:</label>
+      <input type="text" name="Salary" value="@Model.Salary" class="form-control" id="Salary">
+    </div>
+    <div class="form-group">
+      <label for="Job">Enter Job:</label>
+      <input type="text" name="Job" class="form-control" value="@Model.Job" id="Job">
+    </div>
+    <div class="form-group">
+      <label for="Dname">Enter Dname:</label>
+      <input type="text" name="Dname" class="form-control" value="@Model.Dname" id="Dname">
+    </div>
+    <button type="submit" class="btn btn-default">Update</button>
+  </form>
+  </div>

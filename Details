@@ -1,0 +1,18 @@
+@model ADOIntegration.Models.Employee
+
+<h4>Employee Details are</h4>
+<div>
+    <dl>
+        <dt>Eno is</dt>
+        <dd>@Model.Eno</dd>
+        <dt>Ename is</dt>
+        <dd>@Model.Ename</dd>
+        <dt>Salary is</dt>
+        <dd>@Model.Salary</dd>
+        <dt>Job is</dt>
+        <dd>@Model.Job</dd>
+        <dt>Dname is</dt>
+        <dd>@Model.Dname</dd>
+    </dl>
+    <a href="/">Back to index</a>
+</div>

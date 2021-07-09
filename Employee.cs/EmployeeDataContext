@@ -1,0 +1,104 @@
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
+
+namespace ADOIntegration.Models
+{
+    public class EmployeeDataContext
+    {
+        SqlConnection Con;
+        SqlCommand cmd;
+        SqlDataReader DR;
+        public EmployeeDataContext()
+        {
+            Con = new SqlConnection(ConfigurationManager.ConnectionStrings["NareshITDB"].ConnectionString);
+        }
+
+        //Read the Data
+        public List<Employee> GetEmployees()
+        {
+            List<Employee> employees = new List<Employee>();
+            cmd = new SqlCommand("select * from Employee", Con);
+            Con.Open();
+            DR = cmd.ExecuteReader();
+            if (DR.HasRows)
+            {
+                while (DR.Read())
+                {
+                    Employee emp = new Employee();
+                    emp.Eno = Convert.ToInt32(DR["Eno"]);
+                    emp.Ename = Convert.ToString(DR["Ename"]);
+                    emp.Salary = Convert.ToDouble(DR["Salary"]);
+                    emp.Job = Convert.ToString(DR["Job"]);
+                    emp.Dname = Convert.ToString(DR["Dname"]);
+                    employees.Add(emp);
+                }    
+            }
+            Con.Close();
+            return employees;
+        }
+
+        internal void UpdateEmployee(Employee emp)
+        {
+            string Query = "update Employee set Ename=@P2,Salary=@P3,Job=@P4,Dname=@P5 where Eno=@P1";
+            CRUD(emp, Query);
+        }
+
+       
+
+        public void InsertEmp(Employee emp)
+        {
+            string Query = "insert into Employee values(@P1,@P2,@P3,@P4,@P5)";
+            CRUD(emp, Query);
+        }
+
+        
+
+        private void CRUD(Employee emp, string Query)
+        {
+            cmd = new SqlCommand(Query, Con);
+            cmd.Parameters.AddWithValue("@P1", emp.Eno);
+            cmd.Parameters.AddWithValue("@P2", emp.Ename);
+            cmd.Parameters.AddWithValue("@P3", emp.Salary);
+            cmd.Parameters.AddWithValue("@P4", emp.Job);
+            cmd.Parameters.AddWithValue("@P5", emp.Dname);
+            Con.Open();
+            cmd.ExecuteNonQuery();
+            Con.Close();
+        }
+
+        public Employee GetEmployee(int eno)
+        {
+            Employee emp = new Employee();
+            cmd = new SqlCommand("select * from Employee where Eno=" + eno, Con);
+            Con.Open();
+            DR = cmd.ExecuteReader();
+            if (DR.HasRows)
+            {
+                if (DR.Read())
+                {                    
+                    emp.Eno = Convert.ToInt32(DR["Eno"]);
+                    emp.Ename = Convert.ToString(DR["Ename"]);
+                    emp.Salary = Convert.ToDouble(DR["Salary"]);
+                    emp.Job = Convert.ToString(DR["Job"]);
+                    emp.Dname = Convert.ToString(DR["Dname"]);                    
+                }
+            }
+            Con.Close();
+            return emp;
+        }
+        public Employee DeleteEmployee(int eno)
+        {
+            Employee emp = new Employee();
+            cmd = new SqlCommand("Delete from Employee where Eno="+eno,Con);
+            Con.Open();
+            cmd.ExecuteNonQuery();
+            Con.Close();
+            return emp;
+        }
+       
+
+
+    }
+}

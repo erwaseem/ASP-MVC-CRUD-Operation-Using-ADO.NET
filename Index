@@ -1,0 +1,39 @@
+@model List<ADOIntegration.Models.Employee>
+@{
+  ViewBag.Title = "Index";
+}
+
+
+
+<h4 class="text-center text-success">Welcome to ADO.Net Integration with ASP.Net MVC</h4>
+<a href="/Employee/Create" class="btn btn-default">Create New Emp</a>
+<br /><br />
+<table class="table table-bordered table-hover">
+  <tr>
+    <th>Eno</th>
+    <th>Ename</th>
+    <th>Salary</th>
+    <th>Job</th>
+    <th>Dname</th>
+    <th class="text-center">Actions</th>
+  </tr>
+  @{
+    foreach (var item in Model)
+    {
+      <tr>
+        <td>@item.Eno</td>
+        <td>@item.Ename</td>
+        <td>@item.Salary</td>
+        <td>@item.Job</td>
+        <td>@item.Dname</td>
+        <td>
+          <a href="/Employee/Details/@item.Eno" class="btn btn-info">Details</a>
+          <a href="/Employee/Edit/@item.Eno" class="btn btn-warning">Edit</a>
+          <a href="/Employee/Delete/@item.Eno" class="btn btn-danger">Delete</a>
+        </td>
+      </tr>
+    }
+  }
+</table>
+
+

@@ -1,0 +1,54 @@
+using ADOIntegration.Models;
+using System.Collections.Generic;
+using System.Web.Mvc;
+
+namespace ADOIntegration.Controllers
+{
+    public class EmployeeController : Controller
+    {
+        EmployeeDataContext _dbContext;
+        public EmployeeController()
+        {
+            _dbContext = new EmployeeDataContext();
+        }
+        // GET: Employee
+        public ActionResult Index()
+        {
+            List<Employee> emps = _dbContext.GetEmployees();
+            return View(emps);
+        }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Create(Employee emp)
+        {
+            _dbContext.InsertEmp(emp);
+            return RedirectToAction("Index");
+        }
+        public ActionResult Details(int id)
+        {
+           Employee emp =  _dbContext.GetEmployee(id);
+            return View(emp);
+        }
+
+        public ActionResult Edit(int id)
+        {
+            Employee emp = _dbContext.GetEmployee(id);
+            return View(emp);
+        }
+        [HttpPost]
+        public ActionResult Edit(Employee emp)
+        {
+            _dbContext.UpdateEmployee(emp);
+            return RedirectToAction("Index");
+        }
+        public ActionResult Delete(int id)
+        {
+            Employee emp = _dbContext.DeleteEmployee(id);
+            return RedirectToAction("Index");
+        }
+    }
+}
